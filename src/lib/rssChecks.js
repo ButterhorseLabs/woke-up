@@ -30,6 +30,14 @@ function getText(el) {
   return (el.textContent || '').trim();
 }
 
+// querySelector('link') matches atom:link too because CSS selectors ignore XML namespaces.
+// This finds the plain RSS <link> element (no namespace).
+function getRssLink(parent) {
+  return Array.from(parent.children).find(
+    el => el.localName === 'link' && !el.namespaceURI
+  ) || null;
+}
+
 function getItunesEl(parent, tagName) {
   return (
     parent.querySelector(`itunes\\:${tagName}`) ||
@@ -120,7 +128,7 @@ export function validateFeed(xmlString, feedUrl) {
     detail: channelTitle || 'Feed is missing a channel title',
   });
 
-  const channelLink = getText(channel.querySelector(':scope > link'));
+  const channelLink = getText(getRssLink(channel));
   const linkOk = Boolean(channelLink && channelLink.startsWith('http'));
   checks.push({
     id: 'channel-link',
@@ -296,7 +304,7 @@ export function validateFeed(xmlString, feedUrl) {
       getItunesEl(channel, 'image')?.getAttribute('href') ||
       '',
     feedLanguage: getText(channel.querySelector(':scope > language')) || 'en-us',
-    feedLink: getText(channel.querySelector(':scope > link')),
+    feedLink: getText(getRssLink(channel)),
     latestEpisodeTitle: latestItem ? getText(latestItem.querySelector('title')) : '',
     latestPubDate: latestItem ? getText(latestItem.querySelector('pubDate')) : '',
     enclosureType: enclosure?.getAttribute('type') || '',
