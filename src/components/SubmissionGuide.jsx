@@ -128,10 +128,10 @@ export default function SubmissionGuide({ meta }) {
       {/* About you */}
       <Section title="About you">
         <div className="grid grid-cols-2 gap-3">
-          <Prompt label="First name *" placeholder="Your first name" />
-          <Prompt label="Last name *" placeholder="Your last name" />
+          <Prompt label="First name *" placeholder="Enter on the form" />
+          <Prompt label="Last name *" placeholder="Enter on the form" />
         </div>
-        <Prompt label="Email address *" placeholder="Your email address" />
+        <Prompt label="Email address *" placeholder="Enter on the form" />
         <Field label="Publisher name *" id="pub" value={publisherName} onChange={setPublisherName}
           copied={copied['pub']} onCopy={() => copy('pub', publisherName)} />
         <Field label="News site URL *" id="site" value={newsSiteUrl} onChange={setNewsSiteUrl}
@@ -247,8 +247,9 @@ function Prompt({ label, placeholder }) {
   return (
     <div className="space-y-1.5">
       <label className="text-xs text-gray-500 font-semibold uppercase tracking-wider">{label}</label>
-      <div className="px-3 py-2.5 bg-[#0a0a0f] border border-gray-800 rounded-lg text-sm text-gray-600 italic">
-        {placeholder}
+      <div className="px-3 py-2.5 rounded-lg text-sm font-semibold text-gray-500 flex items-center gap-2 border border-dashed border-gray-700">
+        <span className="text-lg leading-none">✏️</span>
+        <span>{placeholder}</span>
       </div>
     </div>
   )
