@@ -76,9 +76,6 @@ function guessLanguageCountry(feedLanguage) {
 }
 
 export default function SubmissionGuide({ meta }) {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
   const [publisherName, setPublisherName] = useState(meta.feedTitle || '')
   const [newsSiteUrl, setNewsSiteUrl] = useState(meta.feedLink || '')
   const [category, setCategory] = useState('')
@@ -98,9 +95,6 @@ export default function SubmissionGuide({ meta }) {
 
   const copyAll = async () => {
     const lines = [
-      `First name: ${firstName}`,
-      `Last name: ${lastName}`,
-      `Email: ${email}`,
       `Publisher name: ${publisherName}`,
       `News site URL: ${newsSiteUrl}`,
       `Feed name: ${meta.feedTitle}`,
@@ -134,13 +128,10 @@ export default function SubmissionGuide({ meta }) {
       {/* About you */}
       <Section title="About you">
         <div className="grid grid-cols-2 gap-3">
-          <Field label="First name *" id="fn" value={firstName} onChange={setFirstName}
-            copied={copied['fn']} onCopy={() => copy('fn', firstName)} />
-          <Field label="Last name *" id="ln" value={lastName} onChange={setLastName}
-            copied={copied['ln']} onCopy={() => copy('ln', lastName)} />
+          <Prompt label="First name *" placeholder="Your first name" />
+          <Prompt label="Last name *" placeholder="Your last name" />
         </div>
-        <Field label="Email address *" id="email" value={email} onChange={setEmail}
-          type="email" copied={copied['email']} onCopy={() => copy('email', email)} />
+        <Prompt label="Email address *" placeholder="Your email address" />
         <Field label="Publisher name *" id="pub" value={publisherName} onChange={setPublisherName}
           copied={copied['pub']} onCopy={() => copy('pub', publisherName)} />
         <Field label="News site URL *" id="site" value={newsSiteUrl} onChange={setNewsSiteUrl}
@@ -247,6 +238,17 @@ function Section({ title, children }) {
       </p>
       <div className="space-y-4">
         {children}
+      </div>
+    </div>
+  )
+}
+
+function Prompt({ label, placeholder }) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-xs text-gray-500 font-semibold uppercase tracking-wider">{label}</label>
+      <div className="px-3 py-2.5 bg-[#0a0a0f] border border-gray-800 rounded-lg text-sm text-gray-600 italic">
+        {placeholder}
       </div>
     </div>
   )
