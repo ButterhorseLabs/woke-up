@@ -139,7 +139,10 @@ export function validateFeed(xmlString, feedUrl) {
       : 'Feed is missing a channel description',
   });
 
-  const channelImageUrl = getText(channel.querySelector(':scope > image > url'));
+  const channelImageUrl =
+    getText(channel.querySelector(':scope > image > url')) ||
+    getItunesEl(channel, 'image')?.getAttribute('href') ||
+    '';
   checks.push({
     id: 'channel-image',
     label: 'Channel has artwork',
@@ -285,7 +288,10 @@ export function validateFeed(xmlString, feedUrl) {
     feedTitle: getText(channel.querySelector(':scope > title')),
     feedDescription: getText(channel.querySelector(':scope > description')),
     feedUrl,
-    feedImageUrl: getText(channel.querySelector(':scope > image > url')),
+    feedImageUrl:
+      getText(channel.querySelector(':scope > image > url')) ||
+      getItunesEl(channel, 'image')?.getAttribute('href') ||
+      '',
     feedLanguage: getText(channel.querySelector(':scope > language')) || 'en-us',
     latestEpisodeTitle: latestItem ? getText(latestItem.querySelector('title')) : '',
     latestPubDate: latestItem ? getText(latestItem.querySelector('pubDate')) : '',
