@@ -93,25 +93,6 @@ export default function SubmissionGuide({ meta }) {
     } catch {}
   }
 
-  const copyAll = async () => {
-    const lines = [
-      `Publisher name: ${publisherName}`,
-      `News site URL: ${newsSiteUrl}`,
-      `Feed name: ${meta.feedTitle}`,
-      `Audio feed URL: ${meta.feedUrl}`,
-      `News category: ${category || '(select)'}`,
-      `Feed refresh frequency: ${frequency || '(select)'}`,
-      `Feed length: ${feedLength || '(select)'}`,
-      `Language / Country: ${language}`,
-      synonyms ? `Synonyms: ${synonyms}` : null,
-    ].filter(Boolean).join('\n\n')
-    try {
-      await navigator.clipboard.writeText(lines)
-      setCopied(prev => ({ ...prev, all: true }))
-      setTimeout(() => setCopied(prev => ({ ...prev, all: false })), 2000)
-    } catch {}
-  }
-
   return (
     <div className="space-y-8">
       <div>
@@ -175,18 +156,12 @@ export default function SubmissionGuide({ meta }) {
         </div>
       </Section>
 
-      {/* CTAs */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <a href="https://support.google.com/faqs/contact/news_briefings_default"
-          target="_blank" rel="noopener noreferrer"
-          className="btn-grad flex-1 text-center px-6 py-4 text-white font-bold text-base rounded-lg">
-          Open Google's form →
-        </a>
-        <button onClick={copyAll}
-          className="flex-1 px-6 py-4 bg-[#1a1a2e] hover:bg-[#222240] text-gray-300 font-semibold rounded-lg border border-gray-700 transition-colors cursor-pointer text-base">
-          {copied.all ? '✓ Copied!' : 'Copy everything to clipboard'}
-        </button>
-      </div>
+      {/* CTA */}
+      <a href="https://support.google.com/faqs/contact/news_briefings_default"
+        target="_blank" rel="noopener noreferrer"
+        className="btn-grad block text-center px-6 py-4 text-white font-bold text-base rounded-lg">
+        Open Google's form →
+      </a>
 
       {/* LUFS callout */}
       <div className="grad-border rounded-lg p-5 space-y-2 bg-[#0f0f1a]">
