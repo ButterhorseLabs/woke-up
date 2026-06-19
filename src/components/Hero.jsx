@@ -1,8 +1,10 @@
 export default function Hero({ onStart }) {
   return (
     <div className="space-y-6">
-      <h1 className="text-4xl font-bold leading-tight text-white">
-        Your morning show could wake up America.
+      <h1 className="text-4xl font-bold leading-tight">
+        <span className="grad-text">Your morning show</span>
+        <br />
+        <span className="text-white">could wake up America.</span>
       </h1>
 
       <p className="text-lg text-gray-400 leading-relaxed">
@@ -30,18 +32,18 @@ export default function Hero({ onStart }) {
         </p>
       </div>
 
-      <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-5 space-y-3">
+      <div className="grad-border rounded-lg p-5 space-y-3 bg-[#0f0f1a]">
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
           What this tool does
         </p>
         <ul className="space-y-2">
           {[
             "Checks if your show qualifies for Google's News Briefing channel",
-            'Validates your RSS feed against Google\'s technical requirements',
+            "Validates your RSS feed against Google's technical requirements",
             'Prepares everything you need for the 5-minute submission form',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-gray-300">
-              <span className="text-[#e53e3e] mt-0.5 shrink-0">→</span>
+              <span className="grad-text font-bold mt-0.5 shrink-0">→</span>
               <span>{item}</span>
             </li>
           ))}
@@ -50,7 +52,7 @@ export default function Hero({ onStart }) {
 
       <button
         onClick={onStart}
-        className="w-full sm:w-auto px-8 py-4 bg-[#e53e3e] hover:bg-[#c53030] text-white font-bold text-lg rounded-lg transition-colors cursor-pointer"
+        className="btn-grad w-full sm:w-auto px-8 py-4 text-white font-bold text-lg rounded-lg cursor-pointer"
       >
         Check my show →
       </button>

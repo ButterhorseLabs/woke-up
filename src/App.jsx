@@ -31,42 +31,24 @@ export default function App() {
     : 0
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-gray-100">
+    <div className="min-h-screen bg-[#0a0a0f] text-gray-100">
       <div className="max-w-2xl mx-auto px-4 py-10 pb-24">
 
-        <StepWrapper
-          step={1}
-          title="What is this?"
-          summary="Get your show into Android morning alarms"
-          isExpanded={expandedStep === 1}
-          isComplete={maxStep > 1}
-          onToggle={() => toggleStep(1)}
-        >
+        <StepWrapper step={1} title="What is this?" summary="Get your show into Android morning alarms"
+          isExpanded={expandedStep === 1} isComplete={maxStep > 1} onToggle={() => toggleStep(1)}>
           <Hero onStart={() => revealStep(2)} />
         </StepWrapper>
 
         {maxStep >= 2 && (
-          <StepWrapper
-            step={2}
-            title="Check eligibility"
-            summary="Eligibility: ✓ Passed"
-            isExpanded={expandedStep === 2}
-            isComplete={maxStep > 2}
-            onToggle={() => toggleStep(2)}
-          >
+          <StepWrapper step={2} title="Check eligibility" summary="Eligibility: ✓ Passed"
+            isExpanded={expandedStep === 2} isComplete={maxStep > 2} onToggle={() => toggleStep(2)}>
             <EligibilityQuiz onComplete={() => revealStep(3)} />
           </StepWrapper>
         )}
 
         {maxStep >= 3 && (
-          <StepWrapper
-            step={3}
-            title="Validate your RSS feed"
-            summary={feedUrl ? `Feed: ${feedUrl}` : 'RSS validation'}
-            isExpanded={expandedStep === 3}
-            isComplete={maxStep > 3}
-            onToggle={() => toggleStep(3)}
-          >
+          <StepWrapper step={3} title="Validate your RSS feed" summary={feedUrl ? `Feed: ${feedUrl}` : 'RSS validation'}
+            isExpanded={expandedStep === 3} isComplete={maxStep > 3} onToggle={() => toggleStep(3)}>
             <RSSValidator
               onComplete={(checks, meta, url) => {
                 setFeedUrl(url)
@@ -78,14 +60,8 @@ export default function App() {
         )}
 
         {maxStep >= 4 && validationResult && (
-          <StepWrapper
-            step={4}
-            title="Validation results"
-            summary={`${passCount} passed · ${failCount} failed`}
-            isExpanded={expandedStep === 4}
-            isComplete={maxStep > 4}
-            onToggle={() => toggleStep(4)}
-          >
+          <StepWrapper step={4} title="Validation results" summary={`${passCount} passed · ${failCount} failed`}
+            isExpanded={expandedStep === 4} isComplete={maxStep > 4} onToggle={() => toggleStep(4)}>
             <ValidationResults
               checks={validationResult.checks}
               meta={validationResult.meta}
@@ -95,14 +71,8 @@ export default function App() {
         )}
 
         {maxStep >= 5 && validationResult && (
-          <StepWrapper
-            step={5}
-            title="Submit to Google"
-            summary="Submission guide"
-            isExpanded={expandedStep === 5}
-            isComplete={false}
-            onToggle={() => toggleStep(5)}
-          >
+          <StepWrapper step={5} title="Submit to Google" summary="Submission guide"
+            isExpanded={expandedStep === 5} isComplete={false} onToggle={() => toggleStep(5)}>
             <SubmissionGuide meta={validationResult.meta} />
           </StepWrapper>
         )}
@@ -122,15 +92,15 @@ function StepWrapper({ step, title, summary, isExpanded, isComplete, onToggle, c
         aria-expanded={isExpanded}
       >
         <span
-          className="text-3xl font-bold font-mono min-w-[3rem] leading-none transition-colors"
-          style={{ color: isExpanded ? '#e53e3e' : '#7f1d1d' }}
+          className={`text-3xl font-bold font-mono min-w-[3rem] leading-none select-none ${isExpanded ? 'grad-text' : ''}`}
+          style={isExpanded ? {} : { color: '#3d1f5c' }}
         >
           {stepNum}
         </span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="text-base font-semibold text-gray-100">{title}</span>
-            {isComplete && <span className="text-green-500 text-sm">✓</span>}
+            {isComplete && <span className="text-emerald-400 text-sm">✓</span>}
           </div>
           {!isExpanded && isComplete && (
             <p className="text-sm text-gray-600 mt-0.5 truncate">{summary}</p>

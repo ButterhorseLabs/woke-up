@@ -94,7 +94,7 @@ export default function ValidationResults({ checks, meta, onReadyToSubmit }) {
       {passes.length > 0 && (
         <button
           onClick={() => setShowPassed(p => !p)}
-          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg border border-gray-800 hover:border-gray-700 text-sm text-gray-500 hover:text-gray-400 transition-colors cursor-pointer"
+          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg border border-gray-800 hover:border-purple-900 text-sm text-gray-500 hover:text-gray-400 transition-colors cursor-pointer"
         >
           <span className="flex items-center gap-2">
             <span className="text-green-600">✓</span>
@@ -115,7 +115,7 @@ export default function ValidationResults({ checks, meta, onReadyToSubmit }) {
         <div className="pt-1">
           <button
             onClick={onReadyToSubmit}
-            className="w-full sm:w-auto px-8 py-4 bg-[#e53e3e] hover:bg-[#c53030] text-white font-bold text-lg rounded-lg transition-colors cursor-pointer"
+            className="btn-grad w-full sm:w-auto px-8 py-4 text-white font-bold text-lg rounded-lg cursor-pointer"
           >
             Prepare my submission →
           </button>

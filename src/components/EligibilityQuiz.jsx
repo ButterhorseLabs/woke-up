@@ -40,10 +40,7 @@ export default function EligibilityQuiz({ onComplete }) {
     const newAnswers = { ...answers, [id]: value }
     setAnswers(newAnswers)
 
-    if (
-      value === 'yes' &&
-      QUESTIONS.every(q => newAnswers[q.id] === 'yes')
-    ) {
+    if (value === 'yes' && QUESTIONS.every(q => newAnswers[q.id] === 'yes')) {
       setCompleted(true)
       setTimeout(onComplete, 500)
     }
@@ -59,9 +56,9 @@ export default function EligibilityQuiz({ onComplete }) {
   if (completed) {
     return (
       <div className="flex items-center gap-4 py-4">
-        <span className="text-3xl text-green-400">✓</span>
+        <span className="text-3xl grad-text">✓</span>
         <div>
-          <p className="font-semibold text-green-300">Your show looks eligible!</p>
+          <p className="font-semibold text-emerald-300">Your show looks eligible!</p>
           <p className="text-sm text-gray-500 mt-0.5">Moving on to RSS validation…</p>
         </div>
       </div>
@@ -71,7 +68,7 @@ export default function EligibilityQuiz({ onComplete }) {
   if (firstFail) {
     return (
       <div className="space-y-4">
-        <div className="bg-[#1a1a1a] border border-yellow-900 rounded-lg p-5">
+        <div className="bg-[#1a1020] border border-yellow-900 rounded-lg p-5">
           <div className="flex items-start gap-3">
             <span className="text-yellow-500 text-xl shrink-0 mt-0.5">⚠</span>
             <div className="space-y-2">
@@ -81,7 +78,7 @@ export default function EligibilityQuiz({ onComplete }) {
                 href="https://support.google.com/assistant/answer/9343892"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-[#e53e3e] hover:underline text-sm mt-1"
+                className="inline-block grad-text text-sm mt-1 hover:opacity-80"
               >
                 Read Google's eligibility requirements →
               </a>
@@ -111,10 +108,10 @@ export default function EligibilityQuiz({ onComplete }) {
             <div className="flex gap-3">
               <button
                 onClick={() => answer(q.id, 'yes')}
-                className={`px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer border ${
+                className={`px-6 py-2 rounded-lg font-medium transition-all cursor-pointer border ${
                   answered === 'yes'
-                    ? 'bg-green-800 border-green-600 text-white'
-                    : 'bg-[#262626] border-gray-700 text-gray-300 hover:bg-[#333] hover:border-gray-600'
+                    ? 'grad text-white border-transparent'
+                    : 'bg-[#1a1a2e] border-gray-700 text-gray-300 hover:border-purple-800'
                 }`}
               >
                 Yes
@@ -124,7 +121,7 @@ export default function EligibilityQuiz({ onComplete }) {
                 className={`px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer border ${
                   answered === 'no'
                     ? 'bg-red-950 border-red-700 text-red-300'
-                    : 'bg-[#262626] border-gray-700 text-gray-300 hover:bg-[#333] hover:border-gray-600'
+                    : 'bg-[#1a1a2e] border-gray-700 text-gray-300 hover:border-gray-600'
                 }`}
               >
                 No
