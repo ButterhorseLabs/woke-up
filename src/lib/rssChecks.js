@@ -284,6 +284,9 @@ export function validateFeed(xmlString, feedUrl) {
   // ── Metadata extraction ───────────────────────────────────────────────────
 
   const enclosure = latestItem?.querySelector('enclosure');
+  const latestDurationEl = latestItem ? getItunesEl(latestItem, 'duration') : null;
+  const latestDurationSeconds = parseDurationSeconds(getText(latestDurationEl));
+
   const meta = {
     feedTitle: getText(channel.querySelector(':scope > title')),
     feedDescription: getText(channel.querySelector(':scope > description')),
@@ -293,9 +296,11 @@ export function validateFeed(xmlString, feedUrl) {
       getItunesEl(channel, 'image')?.getAttribute('href') ||
       '',
     feedLanguage: getText(channel.querySelector(':scope > language')) || 'en-us',
+    feedLink: getText(channel.querySelector(':scope > link')),
     latestEpisodeTitle: latestItem ? getText(latestItem.querySelector('title')) : '',
     latestPubDate: latestItem ? getText(latestItem.querySelector('pubDate')) : '',
     enclosureType: enclosure?.getAttribute('type') || '',
+    latestDurationSeconds,
   };
 
   return { checks, meta };
