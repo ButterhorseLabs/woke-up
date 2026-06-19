@@ -70,10 +70,19 @@ export function validateFeed(xmlString, feedUrl) {
   }
 
   const rssEl = doc.documentElement;
+
+  if (rssEl.localName === 'feed' && rssEl.getAttribute('xmlns') === 'http://www.w3.org/2005/Atom') {
+    throw new Error(
+      "This is an Atom feed, not an RSS 2.0 feed. Google News Briefings requires RSS 2.0 with audio enclosures. " +
+      "YouTube's auto-generated feeds are Atom format and link to video embeds — they can't be submitted directly. " +
+      "You'll need a separate podcast RSS feed hosted on a platform like Buzzsprout, Transistor, or Spotify for Podcasters."
+    );
+  }
+
   const channel = rssEl.querySelector('channel');
 
   if (!channel) {
-    throw new Error("No <channel> element found. This may not be an RSS feed.");
+    throw new Error("No <channel> element found. This doesn't appear to be a valid RSS 2.0 feed.");
   }
 
   const items = Array.from(channel.querySelectorAll(':scope > item'));
